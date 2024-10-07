@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAATlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////f398fHx+/v79/f3+fn59fX1+Pj48/Pz/Pz8+vr69QUFBAQEAQEBDv7+8wMDBcBeWMAAAACXRSTlMA79+/jz8gzzBWiwwZAAABAklEQVRIx83Wy66CQAyA4bmK7dwFxPP+L3qmNS4MYKZx45+wIPnSzIYpivNuMhpO08Y6r15dLAxkLoq7ahhKX3k26TFP8w0MZ5XyIMgrJ+FOWQmflJFwo7SEawWifpOncNQcT3jAw0I847e4byZ/zCPsSzRfwskLOHsBZz/IW6JwHuRcxPAtjxEkvJUNqFxgLVxe6S1+PkxCyBhS74G5v90GeIbeHRPx4elzfPKttB1fcOl+WzF0vtTego05teMxIGJ/Hn/vh+HSO+fWXEqrW3f5zgNyhZq5+tuf9ljCS096pU4SboXrQLpsJOvDCBeleA3TfDOiLc/mvLOffyEm5xn+A62wS2pyreCSAAAAAElFTkSuQmCC">
-    <title>url2file</title>
+    <title>Clickable link generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-                html {
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        }
-        *, *:before, *:after {
-        box-sizing: inherit;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-        body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-        margin: 0;
-        padding: 0;
-        font-weight: normal;
-        color: #fff;
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body { 
@@ -28,21 +24,35 @@
             font-size: 16px;
             background-color: #1E1E1E;
             color: #fff;
-            position: relative;
-            height: calc(100dvh - 80px);
+            display: flex;
+            flex-direction: column;
             width: 100%;
             max-width: 1200px;
-            margin: 80px 0 0 0;
-            padding: 0px 40px;
+            margin: 0 auto;
+            padding: 80px 40px 20px;
         }
-        .logo {
-            color: #fff;
-            text-decoration: none;
+
+        .content {
+            flex: 1 0 auto;
         }
+
+        .logo svg {
+            fill: #fff;
+        }
+
         h1 {
-            font-weight: 400;
+            font-weight: 700;
             font-size: 32px;
             margin: 80px 0 40px 0;
+            text-align: center;
+        }
+
+        .toolWrapper {
+            margin-top: 30%;
+        }
+
+        label {
+            font-weight: 500;
         }
 
         input {
@@ -59,94 +69,173 @@
             width: 80%;
             box-sizing: unset;
         }
+
         button, .button {
-        background-color: #2C2C2C;
-        font-family: 'Azeret Mono', monospace;
-        font-size: 16px;
-        color: #fff;
-        text-decoration: none;
-          display: inline-block;
-          padding: 20px 30px;
-          margin: 5px;
-          cursor: pointer;
-          border: 2px solid transparent;
-          transition: all 0.3s ease-in-out; /* Ensures smooth transition for background and borders */
-          border-radius: 10px;
-      }
-      .button:hover, button:hover { border: 2px solid #444444; }
-      
-      footer {
-        border-top: #2C2C2C 1px solid;
-        margin-top: 50vh;
-        padding-top: 10px;
-        max-width: 1200px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-    }
+            background-color: #2C2C2C;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 20px 30px;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
 
-    .logo_footer {
-        color: #2C2C2C;
-        text-decoration: none;
-    }
+        button svg, .button svg{
+            margin-right: 10px;
+            fill: #fff;
+            transition: all .3s ease-in-out;
+        }
 
-    footer p {
-        color: #2C2C2C;
-        padding-bottom: 60px;
-    }
-
-    .firefox {
-        margin-top: 20px;
-        padding: 10px 20px;
-        border: 1px solid #444444;
-        border-radius: 10px;
-        color: #444444;
-    }
-
-    .input-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    @media only screen and (max-width: 750px) {
-        .input-wrapper {
-        display: block;
-    }
-
-    input {
-        margin-top: 10px;
-        margin-left: 0;
-            margin-right: 0;
+        .button:hover, button:hover:not(:disabled) { 
+            border: 2px solid #5e6d09;
+            transform: translateX(1px);
+         }
         
-    }
-        button, .button {
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        button:not(:disabled) {
+            background-color: #D2EE3A;
+            color: #1E1E1E;
+        }
+
+        button:not(:disabled) svg{
+            fill: #1E1E1E;
+        }
+      
+        footer {
+            flex-shrink: 0;
+            border-top: #444444 1px solid;
+            padding-top: 10px;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
             margin-top: 20px;
         }
+
+        .logo_footer svg {
+        fill: #2C2C2C;
+        width: 40px;
     }
+
+        footer p {
+            color: #444444;
+            margin: 0;
+        }
+
+        .info, .alert {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: 1px solid #444444;
+            border-radius: 10px;
+            color: #444444;
+            transition: all .3s ease-in-out;
+        }
+        .info span {
+            color: #D2EE3A;
+            margin-right: 10px;
+        }
+        .alert span {
+            color: #fdba00;
+            margin-right: 10px;
+        }
+        .info:hover {
+            color: #D2EE3A;
+            border: 1px solid #D2EE3A;
+            cursor: help;
+        }
+        .alert:hover {
+            color: #fdba00;
+            border: 1px solid #fdba00;
+            cursor: help;
+        }
+
+        .input-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 750px) {
+            .input-wrapper {
+                display: block;
+            }
+
+            input {
+                margin-top: 10px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            button, .button {
+                margin-top: 20px;
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <a class="logo" href="https://x-g.ca">/xavier<br>godbout</a>
-    </header>
-    <h1>Générateur de liens cliquables</h1>
-        <div class="input-wrapper">
-            <label for="urlInput">URL:</label>
-            <input type="text" id="urlInput" placeholder="https://example.com">
-            <button onclick="downloadFile()">Téléchager</button>
+    <div class="content">
+        <header>
+            <a class="logo" href=""><svg width="97" height="43" viewBox="0 0 97 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M88.8226 11.5891V7.4121H96.8345V28.9933C96.7928 38.4939 91.4932 42.3842 81.228 42.3842C74.5097 42.3842 68.7094 41.3605 64.2445 40.3367L65.1625 34.2759C70.1282 35.2588 74.7601 36.0368 79.5171 36.0368C85.7764 36.0368 88.8226 34.235 88.8226 28.8295V26.9867C86.3189 30.4266 81.9374 31.9827 76.8048 31.9827C69.5857 31.9827 62.3667 28.5428 62.3667 19.2879C62.3667 10.033 69.5857 6.59308 76.8048 6.59308C81.9374 6.59308 86.3189 8.14922 88.8226 11.5891ZM79.8092 25.3486C86.0268 25.3486 88.8226 23.1373 88.8226 19.2879C88.8226 15.4794 86.0268 13.2271 79.8092 13.2271C73.5917 13.2271 70.7959 15.4794 70.7959 19.2879C70.7959 23.1373 73.5917 25.3486 79.8092 25.3486Z"/>
+                <path d="M35.3597 31.737H24.4685L37.9886 19.5746L24.4685 7.41211H35.3597L43.2881 15.2337L51.2165 7.41211H62.1077L48.5876 19.5746L62.1077 31.737H51.2165L43.2881 23.9154L35.3597 31.737Z"/>
+                <path d="M11.5588 0H19.362L7.80324 37.8797H0L11.5588 0Z"/>
+                </svg>
+                </a>
+        </header>
+        <div class="toolWrapper">
+            <h1>Clickable link generator</h1>
+            <div class="input-wrapper">
+                <label for="urlInput">URL:</label>
+                <input type="text" id="urlInput" placeholder="https://example.com">
+                <button id="downloadButton" onclick="downloadFile()" disabled><svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12.5263H12V14H0V12.5263ZM6.66667 8.232L10.714 3.75789L11.6567 4.79979L6 11.0526L0.343333 4.80053L1.286 3.75789L5.33333 8.23053V0H6.66667V8.232Z"/>
+                    </svg>Download</button>
+            </div>
+            <p class="info"><span>ⓘ</span>Copy your link and press the 'Download' button. You can now place this file in the Drive.</p>
+            <p class="alert"><span>⚠</span>On Firefox, remove ".download" from the file name before sharing it.</p>
         </div>
-
-    <p class="firefox">* Sur Firefox, retirer ".download" du nom du fichier avant de la partager</p>
+    </div>
 
     <footer>
-        <a href="x-g.ca" class="logo_footer">/xavier<br>godbout</a>
-        <p>© Copyright 2024, Godbout Corporation</p>
+        <a href="" class="logo_footer"><svg viewBox="0 0 97 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M88.8226 11.5891V7.4121H96.8345V28.9933C96.7928 38.4939 91.4932 42.3842 81.228 42.3842C74.5097 42.3842 68.7094 41.3605 64.2445 40.3367L65.1625 34.2759C70.1282 35.2588 74.7601 36.0368 79.5171 36.0368C85.7764 36.0368 88.8226 34.235 88.8226 28.8295V26.9867C86.3189 30.4266 81.9374 31.9827 76.8048 31.9827C69.5857 31.9827 62.3667 28.5428 62.3667 19.2879C62.3667 10.033 69.5857 6.59308 76.8048 6.59308C81.9374 6.59308 86.3189 8.14922 88.8226 11.5891ZM79.8092 25.3486C86.0268 25.3486 88.8226 23.1373 88.8226 19.2879C88.8226 15.4794 86.0268 13.2271 79.8092 13.2271C73.5917 13.2271 70.7959 15.4794 70.7959 19.2879C70.7959 23.1373 73.5917 25.3486 79.8092 25.3486Z"/>
+            <path d="M35.3597 31.737H24.4685L37.9886 19.5746L24.4685 7.41211H35.3597L43.2881 15.2337L51.2165 7.41211H62.1077L48.5876 19.5746L62.1077 31.737H51.2165L43.2881 23.9154L35.3597 31.737Z"/>
+            <path d="M11.5588 0H19.362L7.80324 37.8797H0L11.5588 0Z"/>
+            </svg>
+        </a>
+        <p>© Copyright <span id="currentYear"></span>, Xavier Godbout</p>
     </footer>
 
     <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const urlInput = document.getElementById('urlInput');
+        const downloadButton = document.getElementById('downloadButton');
+
+        urlInput.addEventListener('input', function() {
+            if (this.value.includes('.')) {
+                downloadButton.disabled = false;
+            } else {
+                downloadButton.disabled = true;
+            }
+        });
+
         function downloadFile() {
-            let url = document.getElementById('urlInput').value;
+            let url = urlInput.value;
             url = url.replace(/^https?:\/\/(www\.)?/, '');
             const blob = new Blob([`[InternetShortcut]\nURL=https://${url}`], { type: 'text/plain' });
             const link = document.createElement('a');
